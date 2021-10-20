@@ -55,8 +55,10 @@ def contract(v1,v2):
             graph[v1].append(node)
             #add v1 to node adjaceny list
             graph[node].append(v1) 
-        #Remove v2 from node adjacency list    
-        graph[node].remove(v2) 
+            #Remove v2 from node adjacency list 
+
+        if v2 in graph[node]: 
+            graph[node].remove(v2) 
     #Remove v2 from the graph
     del graph[v2]
 
@@ -76,11 +78,16 @@ num_vertices=len(graph)
 
 #probability of success is 1/n when number of trials is nc2*ln(n)
 trials=int(num_vertices*(num_vertices-1)*math.log(num_vertices)/2)
+print("trials for success probability (1/n)",trials)
 
 #probability of success is 1/e when number of trials is n*n
-#trials=num_vertices*num_vertices 
+trials=num_vertices*num_vertices 
+print("trials for success probability (1/e)",trials)
 
-print("trials",trials)
+#choose trials to be 100, ( for reducing the program running time) , 
+#The total running time for T repetitions for a graph with vertices and m edges is O ( T m ) = O ( n^2 m log ⁡ n ) ~ Big Omega(n^2 m) [lower bound]
+trials=100
+
 
 for i in range(1,trials):
     read_file('kargerMinCut.txt')
